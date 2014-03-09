@@ -11,9 +11,6 @@ import edu.sjsu.cmpe.library.domain.Author;
 public class AuthorDto extends LinksDto 
 {    
 	private Author author;
-//	private Book book;
-//	private List<LinkDto> authorLinks = new ArrayList<LinkDto>();
-//	ArrayList<Author> authorList;
    
     //@param book
     public AuthorDto(Author author) {
@@ -21,14 +18,6 @@ public class AuthorDto extends LinksDto
 		this.author = author;
     }
     
-//    public AuthorDto(List<LinkDto> authors) {
-//    	this.authorLinks = authors;
-//    }
-//    
-//    public AuthorDto(ArrayList<Author> authorList) {
-//    	this.authorList = authorList;
-//    }
-
     //@return the book
     public Author getAuthor() {
     	return author;
@@ -40,20 +29,3 @@ public class AuthorDto extends LinksDto
     }
 }
     
-//    public Book getBook() {
-//    	return this.book;
-//    }
-//    
-//    public void setBook(Book newBook) {
-//    	this.book = newBook;
-//    }
-//    
-//    public List<LinkDto> getAuthors() {
-//    	return this.authorLinks;
-//    }
-//    
-//    public void setAuthors(List<LinkDto> authors) {
-//    	this.authorLinks = authors;
-//    }
-//      
-//}

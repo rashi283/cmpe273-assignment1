@@ -51,26 +51,10 @@ public class ReviewRepository implements ReviewRepositoryInterface
 		checkArgument(id > 0, "ISBN was %s but expected greater than zero value", id);
 		//    return reviewInMemoryMap.get(id);
 		Review foundReview = new Review();
-//		for(long i = 1; i <= reviewInMemoryMap.size(); i++) {
-//			if(id == reviewInMemoryMap.get(i).getId()) {
-//				foundReview = reviewInMemoryMap.get(isbn.get());
-//				//break;
-//			}
-//		}
 		foundReview = reviewInMemoryMap.get(id);
 		return foundReview;
 	}
 	
-//	public ArrayList<Review> getAllReviews()
-//	{
-//		ArrayList<Review> allReviews = new ArrayList<Review>();
-//		for(Integer i = 1; i <= reviewInMemoryMap.size(); i++) {
-//			Review retrievedReview = new Review();
-//			//retrievedReview = getReviewById(isbn, i);
-//			allReviews.add(retrievedReview);
-//		}
-//		return allReviews;
-//	}
 	@Override
 	public ArrayList<Review> getAllReviews()
 	{

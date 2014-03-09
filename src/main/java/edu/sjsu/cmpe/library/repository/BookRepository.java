@@ -52,14 +52,6 @@ public class BookRepository implements BookRepositoryInterface {
 		return newBook;
     }
 
-//    @Override
-//    public Boolean deleteBook(Book delBook)
-//    {
-//    	//Long isbn;	
-//        checkNotNull(delBook, "Delete Book instance must not be null");
-//        bookInMemoryMap.remove(delBook);
-//        return true;
-//    }
     @Override
     public Book deleteBookByIsbn(Long isbn) {
     	checkArgument( isbn > 0, "ISBN was %s but expected value greater than zero", isbn);

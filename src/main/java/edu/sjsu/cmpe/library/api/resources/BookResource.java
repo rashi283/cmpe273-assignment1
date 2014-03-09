@@ -26,7 +26,6 @@ import edu.sjsu.cmpe.library.domain.*;
 import edu.sjsu.cmpe.library.dto.*;
 import edu.sjsu.cmpe.library.repository.BookRepositoryInterface;
 
-//import java.lang.Object;
 
 @Path("/v1/books")
 @Produces(MediaType.APPLICATION_JSON)
@@ -54,26 +53,6 @@ public class BookResource
     public Response createBook(Book request) throws Exception 
     {
 		Book savedBook = bookRepository.saveBook(request);
-//		BookDto bookResponse = new BookDto(savedBook);
-//		
-//		String location = "/books/" + savedBook.getIsbn();
-//		
-//		bookResponse.addLink(new LinkDto("view-book", location, "GET"));
-//		bookResponse.addLink(new LinkDto("update-book", location, "PUT"));
-//		bookResponse.addLink(new LinkDto("delete-book", location, "DELETE"));
-//		bookResponse.addLink(new LinkDto("create-review", location + "/reviews", "POST"));
-//		
-//		System.out.println(savedBook.getIsbn() + "\n" +
-//							savedBook.getTitle() + "\n" +
-//							savedBook.getDate() + "\n" +
-//							savedBook.getNum_Pages() + "\n" +
-//							savedBook.getLanguage() + "\n" +
-//							savedBook.getStatus() + "\n" +
-//							//savedBook.getReview().getRating() + "\n" +
-//							//savedBook.getReview().getComment() + "\n" +
-//							savedBook.getAuthor() + "\n" 
-//							);
-//		return Response.status(201).entity(bookResponse.getLinks()).build();
 		if (savedBook == null) {
 			throw new Exception();
 		}
@@ -90,40 +69,6 @@ public class BookResource
 			
     }
     
-//    @POST
-//    @Timed(name = "create-review")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response createReview(@PathParam("isbn") LongParam isbn) 
-//    {
-//    	Book book = bookRepository.getBookByISBN(isbn.get());
-//    	
-//    	
-//		BookDto bookResponse = new BookDto(book);
-//		
-//		//String location = "/books/" + book.getIsbn();
-//    	return Response.status(201).entity(bookResponse).build();
-//    }
-    
-//    /** API 2 - VIEW BOOK */
-//    @GET
-//    @Path("/{isbn}")
-//    @Timed(name = "view-book")
-//    public BookDto getBookByIsbn(@PathParam("isbn") LongParam isbn) 
-//    {
-//		Book book = bookRepository.getBookByISBN(isbn.get());
-//		BookDto bookResponse = new BookDto(book);
-//		
-//		// add more links
-//		bookResponse.addLink(new LinkDto("view-book", "/books/" + book.getIsbn(),"GET"));
-//		bookResponse.addLink(new LinkDto("update-book","/books/" + book.getIsbn(), "PUT"));
-//		bookResponse.addLink(new LinkDto("delete-book", "/books/" + book.getIsbn(), "DELETE"));
-//		bookResponse.addLink(new LinkDto("create-review", "/books/" + book.getIsbn() + "/reviews", "POST"));
-//		bookResponse.addLink(new LinkDto("view-all-reviews", "/books/" + book.getIsbn() + "/reviews", "GET"));
-//		//bookResponse.addLink(new LinkDto("view-author", "books/" + book.getIsbn() + "/authors/1", "GET"));
-//			
-//		return bookResponse;
-//    }
     @GET
     @Path("/{isbn}")
     @Timed(name = "view-book")
@@ -188,22 +133,7 @@ public class BookResource
     		return Response.ok(links).build();
     	}		
     }
-//    public Response getBookByIsbnToDel(@PathParam("isbn") LongParam isbn) 
-//    {
-//    	boolean returnValue;
-//    	Book book = bookRepository.getBookByISBN(isbn.get());
-//    	BookDto bookResponse = new BookDto(book);
-//    	returnValue = bookRepository.deleteBook(book);	
-//    	bookResponse.addLink(new LinkDto("create-book", "/books", "POST"));	
-//    	if (returnValue == true)
-//    	{
-//    		System.out.println("isbn deleted = " + book.getIsbn());
-//    		return Response.status(201).entity(bookResponse).build();
-//    	}
-//    	else
-//    		return Response.status(405).entity(bookResponse).build();   	
-//    }
-    
+
     /** API 4 - UPDATE BOOK */
     // /books/{isbn}?status={new-status}
     @PUT
@@ -257,12 +187,7 @@ public class BookResource
 	    	return authorResponse;
     	}
     }
-//    public Response getAuthorById(@PathParam("isbn") LongParam isbn) {
-//    	
-//    	ArrayList<Author> authorList = bookRepository.getAuthorByIsbn(isbn.get());
-//    	
-//    	return Response.status(200).entity(authorList).build();
-//    }  
+
     /** API 9 - VIEW ALL BOOK AUTHORS */
     @GET
     @Path("/{isbn}/authors")
@@ -275,57 +200,10 @@ public class BookResource
     	LinksDto links = new LinksDto();
     	//String links = "[]";
     	AuthorsLinksDto authorsLinksResponse = new AuthorsLinksDto(authorList, links);
-    	//authorsLinksResponse.addLink(new LinkDto());
-    	//authorResponse.addLink(new LinkDto(null, null,null));
-    	
-    	//LinksDto links = new LinksDto();
-		//links.addLink(new LinkDto("create-book", "/books", "POST"));
-		//return Response.ok(links).build();
     	return authorsLinksResponse;
     	//return authorResponse;
     }
-    
-//    public Response deleteBook(Book request) {
-//	// Delete the book from the BookRepository.
-//	Book savedBook = bookRepository.saveBook(request);
-//
-//	String location = "/books/" + savedBook.getIsbn();
-//	BookDto bookResponse = new BookDto(savedBook);
-//	bookResponse.addLink(new LinkDto("view-book", location, "GET"));
-//	bookResponse.addLink(new LinkDto("update-book", location, "POST"));
-//	// Add other links if needed
-//
-//	return Response.status(201).entity(bookResponse).build();
-//    } 
         
-    /** API 5 - CREATE BOOK REVIEW */
-    // /books/{isbn}/reviews
-    /*@POST
-    @Timed(name = "create-review")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createReview(Review request) 
-    {
-    	Review savedReview = bookRepository.saveReview(request);
-    	return Response.status(201).entity(reviewResponse).build();
-    }*/
-    
-    /** API 6 - VIEW BOOK REVIEW */
-    // /books/{isbn}/reviews/{id}
-//    @GET
-//    @Path("/books/{isbn}/reviews/{id}")
-//    @Timed(name = "view-review")
-    /*public ReviewDto getReviewById(@PathParam("id") LongParam id, @PathParam("isbn") LongParam isbn)
-    {
-    	Review review = bookRepository.getReviewById(id.get());
-    	ReviewDto reviewResponse = new ReviewDto(review);
-    	
-    	return reviewResponse;
-    }*/
-    
-    /** API 7 - VIEW ALL BOOK REVIEWS */
-    // /books/{isbn}/reviews
-    
 }
 
 

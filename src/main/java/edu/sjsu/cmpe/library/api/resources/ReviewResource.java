@@ -1,9 +1,5 @@
 package edu.sjsu.cmpe.library.api.resources;
 
-//import java.util.Map.Entry;
-//import java.util.Set;
-//import java.util.concurrent.ConcurrentHashMap;
-
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -42,10 +38,6 @@ public class ReviewResource
     public Response createReview(@PathParam("isbn") LongParam isbn, Review request) throws Exception 
     {
 		Review savedReview = reviewRepository.saveReview(isbn, request);
-//		ReviewDto reviewResponse = new ReviewDto(savedReview);
-//		reviewResponse.addLink(new LinkDto("view-review", "/books/"+ isbn + "/reviews/" + savedReview.getId(), "GET"));
-//		System.out.println(savedReview.getId() + "\n" + savedReview.getRating() + "\n" +savedReview.getComment() + "\n" );
-//		return Response.status(201).entity(reviewResponse.getLinks()).build();
     	if (savedReview == null) {
     		throw new Exception();
     	}
@@ -63,10 +55,7 @@ public class ReviewResource
     {
     	Review review = reviewRepository.getReviewById(isbn, id);
     	ReviewDto reviewResponse = new ReviewDto(review);
-    	
     	reviewResponse.addLink(new LinkDto("view-review", "/books" + isbn + "/reviews/" + review.getId(), "GET"));
-    	
-    	//return Response.status(201).entity(reviewResponse.getLinks()).build();
     	return reviewResponse;
     }
     
@@ -79,24 +68,6 @@ public class ReviewResource
     	ArrayList<Review> reviewList = reviewRepository.getAllReviews();
     	LinksDto reviewLinks = new LinksDto();
     	ReviewListDto reviewResponse = new ReviewListDto(reviewList, reviewLinks);
-    	
-    	//reviewResponse.addLink(new LinkDto());
-    	
     	return reviewResponse;
     }
-//    public Response getAllReviews()
-//    {
-//    	ArrayList<Review> reviewList = reviewRepository.getAllReviews();
-//    	
-//    	return Response.status(200).entity(reviewList).build();
-//    }
-//  public ArrayList<Review> getAllReviews() 
-//  {
-//  	ArrayList<Review> reviewList = reviewRepository.getAllReviews();
-//  	//ReviewDto reviewReponse = new ReviewDto(reviewList);
-//  	//reviewResponse.addLinl(new LinkDto()); 	
-//  	return reviewList;	
-//  }
-    
-   
 }

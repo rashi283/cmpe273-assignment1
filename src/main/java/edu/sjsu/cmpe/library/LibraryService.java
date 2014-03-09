@@ -18,8 +18,6 @@ import edu.sjsu.cmpe.library.repository.BookRepositoryInterface;
 import edu.sjsu.cmpe.library.repository.ReviewRepository;
 import edu.sjsu.cmpe.library.repository.ReviewRepositoryInterface;
 
-
-
 public class LibraryService extends Service<LibraryServiceConfiguration> {
 
     public static void main(String[] args) throws Exception {
