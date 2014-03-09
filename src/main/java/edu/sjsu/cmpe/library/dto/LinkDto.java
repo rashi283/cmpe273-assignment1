@@ -16,7 +16,12 @@ public class LinkDto {
 	this.href = href;
 	this.method = method;
     }
-
+    
+    //Rashi
+    public LinkDto() {
+    	//super();
+    }
+    //Rashi
     /**
      * @return the rel
      */
