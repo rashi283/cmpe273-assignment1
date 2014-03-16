@@ -17,8 +17,7 @@ public class AuthorsLinksDto extends LinksDto
     	this.authorsList = authorsList;
     	this.authorsLinks = authorsLinks;
     }
-    
-    
+      
     public void setAuthorList(ArrayList<Author> authorsList) {
     	this.authorsList = authorsList;
     }

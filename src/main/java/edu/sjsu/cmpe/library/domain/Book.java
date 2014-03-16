@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.validation.constraints.Pattern;
 
 @JsonPropertyOrder({"isbn", "title", "publication-date", "language", "num-pages", "status" })
 public class Book 
@@ -16,7 +19,9 @@ public class Book
     private String date;
 
     private String language;
-    private String status;
+    
+    @Pattern(regexp = "available|checked-out|in-queue|lost")
+    private String status = "available";
     
     //@JsonProperty("num-pages")
     private Integer num_pages;
@@ -83,6 +88,7 @@ public class Book
     }
     
     @JsonProperty("authors")
+    //@JsonIgnoreProperties("authors")
     public ArrayList<Author> getAuthor() {
     	//return authorList;
     	return authors;

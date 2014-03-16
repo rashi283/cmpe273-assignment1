@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 //import edu.sjsu.cmpe.library.domain.Book;
@@ -24,6 +25,7 @@ public class ReviewDto extends LinksDto
 		this.review = review;
     }
 	
+	
     public Review getReview() {
     	return review;
     }
@@ -32,17 +34,18 @@ public class ReviewDto extends LinksDto
     	this.review = review;
     }
     
-    public ReviewDto(ArrayList<Review> reviewList) {
-		super();
-		this.reviewList = reviewList;
-	}
+//    public ReviewDto(ArrayList<Review> reviewList) {
+//		super();
+//		this.reviewList = reviewList;
+//	}
     
-    public ArrayList<Review> getReviewList() {
-    	return reviewList;
-    }
-
-    public void setReviewList(ArrayList<Review> reviewList) {
-    	this.reviewList = reviewList;
-    }
+    //@JsonProperty("review")
+//    public ArrayList<Review> getReviewList() {
+//    	return reviewList;
+//    }
+//
+//    public void setReviewList(ArrayList<Review> reviewList) {
+//    	this.reviewList = reviewList;
+//    }
     
 }

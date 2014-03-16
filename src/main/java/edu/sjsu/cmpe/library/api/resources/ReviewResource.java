@@ -55,7 +55,7 @@ public class ReviewResource
     {
     	Review review = reviewRepository.getReviewById(isbn, id);
     	ReviewDto reviewResponse = new ReviewDto(review);
-    	reviewResponse.addLink(new LinkDto("view-review", "/books" + isbn + "/reviews/" + review.getId(), "GET"));
+    	reviewResponse.addLink(new LinkDto("view-review", "/books/" + isbn + "/reviews/" + review.getId(), "GET"));
     	return reviewResponse;
     }
     

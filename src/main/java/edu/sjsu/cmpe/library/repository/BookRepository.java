@@ -70,16 +70,16 @@ public class BookRepository implements BookRepositoryInterface {
     public void updateBookInfo(Book book, Entry<String, List<String>> entry) {
     	String str = entry.getValue().toString();
     	if (entry.getKey().equals("status")) {
-    		book.setStatus(str.substring(1, str.length()));
+    		book.setStatus(str.substring(1, str.length()-1));
     	}
     	else if (entry.getKey().equals("title")) {
-    		book.setTitle(str.substring(1, str.length()));
+    		book.setTitle(str.substring(1, str.length()-1));
     	}
     	else if(entry.getKey().equals("language")) {
-    		book.setLanguage(str.substring(1, str.length()));
+    		book.setLanguage(str.substring(1, str.length()-1));
     	}
     	else if(entry.getKey().equals("publication-date")) {
-    		book.setDate(str.substring(1, str.length()));
+    		book.setDate(str.substring(1, str.length()-1));
     	}
     }
     

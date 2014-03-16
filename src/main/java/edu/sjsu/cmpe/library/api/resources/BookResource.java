@@ -21,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.yammer.dropwizard.jersey.params.LongParam;
 import com.yammer.metrics.annotation.Timed;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import edu.sjsu.cmpe.library.domain.*;
 import edu.sjsu.cmpe.library.dto.*;
@@ -72,23 +73,29 @@ public class BookResource
     @GET
     @Path("/{isbn}")
     @Timed(name = "view-book")
-    public CombinedDto getBookByIsbn(@PathParam("isbn") LongParam isbn, @Context Request req, @Context UriInfo ui) 
+    public CombinedDto getBookByIsbn(@PathParam("isbn") LongParam isbn, 
+    		@Context Request req, @Context UriInfo ui) throws Exception
     {
 		Book book = bookRepository.getBookByISBN(isbn.get());
 		Book formattedBook = formatBook(book);
 		//BookDto bookResponse = new BookDto(book);
 		
+		//ArrayList<Review> reviewList = book.getReview();
+		List<LinkDto> reviewLinks = new ArrayList<LinkDto>();
+		reviewLinks.add(new LinkDto("view-reviews", "/books/" + isbn.get() + "/reviews", "GET"));
+			
 		ArrayList<Author> authorList = book.getAuthor();
-		List<LinkDto> authors = new ArrayList<LinkDto>();
+		List<LinkDto> authorLinks = new ArrayList<LinkDto>();
 		String location;
 		
 		for(Integer i = 0; i<authorList.size() ; i++) {
 			location = "/books/" + isbn.get() + "/authors/" + (i+1);
 			System.out.println(location);
-			authors.add(new LinkDto("view-author", location, "GET"));		
+			System.out.println(authorList.get(i).getAuthor());
+			authorLinks.add(new LinkDto("view-author", location, "GET"));		
 		}
 		
-		CombinedDto comboResponse = new CombinedDto(authors);
+		CombinedDto comboResponse = new CombinedDto(authorLinks, reviewLinks);
 		comboResponse.setBook(formattedBook);
 		location = "/books/" + isbn.get();
 		// add more links
@@ -112,6 +119,8 @@ public class BookResource
 		mainBook.setDate(book.getDate());
 		mainBook.setTitle(book.getTitle());
 		mainBook.setStatus(book.getStatus());
+		//@JsonIgnoreProperties
+		mainBook.setAuthor(book.getAuthor());
 		return mainBook;
 	}
     
